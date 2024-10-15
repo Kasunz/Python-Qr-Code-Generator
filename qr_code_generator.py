@@ -63,7 +63,22 @@ def choose_background():
     if color:
         background_color = color
 
+# function to select and decode a qr code from an image
+def decode_qr():
+    file_path = filedialog.askopenfilename(filetypes=[("PNG Files", "*.png"), ("All Files", "*.*")])
 
+    if not file_path:
+        return
+
+    img = Image.open(file_path)
+
+    # decode the qr code from the image
+    result = decode(img)
+
+    if result:
+        messagebox.showinfo("QR Code Data", f"Decoded Data: {result[0].data.decode('utf-8')}")
+    else:
+        messagebox.showerror("Error", "No QR code found in the image.")
 
 
 # Run the application
