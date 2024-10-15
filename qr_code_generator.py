@@ -2,10 +2,8 @@ import os
 import tkinter as tk
 from tkinter import filedialog, colorchooser, messagebox
 import qrcode
-from click import command
-from pygments.styles.dracula import background
 from pyzbar.pyzbar import decode
-from PIL import Image
+from PIL import Image, ImageTk
 
 # Ensure assets folder exits for save the qr codes
 if not os.path.exists('assets'):
@@ -40,15 +38,17 @@ def generate_qr():
     qr.make(fit=True)
 
     # Create and save the image
-    img = qr.make_image(fill=foreground_color, back_color=background_color)
+    img = qr.make_image(fill_color=foreground_color, back_color=background_color)
     filename = f"assets/qr_code_{len(os.listdir('assets')) + 1}.png"
+
+    img.save(filename)
 
     # Load and resize the image for display
     img = Image.open(filename)
-    img = img.resize((150, 150), Image.ANTIALIAS)
+    img = img.resize((150, 150), Image.Resampling.LANCZOS)
     img = ImageTk.PhotoImage(img)
 
-    qr_label.config(image=img)
+    qr_label.config(image=str(img))
     qr_label.image = img
 
 # function to choose foreground color
@@ -98,7 +98,7 @@ qr_label.pack(pady=20)
 foreground_button = tk.Button(root, text="Choose Foreground color", command=choose_foreground)
 foreground_button.pack(pady=5)
 
-background_button = tk.Button(root, text="Choose Foreground color", command=choose_background)
+background_button = tk.Button(root, text="Choose background color", command=choose_background)
 background_button.pack(pady=5)
 
 # button to decode a qr code from an image
