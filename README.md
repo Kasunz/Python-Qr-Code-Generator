@@ -27,18 +27,23 @@ pip install qrcode Pillow pyzbar
 
 ## Usage
 
-### Generate a QR Code:
+#### Generate a QR Code:
 
 - Enter text like: "Hello! How are you?"
 - Click on "Generate QR code" to see the result.
 
-### Change the QR Code Colors:
+#### Change the QR Code Colors:
 
 - Select your desired foreground and background colors using the color chooser dialogs before generating the QR code.
 
-### Decode a QR Code:
+#### Decode a QR Code:
 
 - Choose a PNG file containing a QR code using the "Decode QR code from image" button. The decoded data will appear in a dialog box.
 
 
+## Screenshot
+
+<p align="center">
+  <img src="assets/Screenshot.png" alt="Screenshot" width="500"/>
+</p>
 
