@@ -2,6 +2,8 @@ import os
 import tkinter as tk
 from tkinter import filedialog, colorchooser, messagebox
 import qrcode
+from click import command
+from pygments.styles.dracula import background
 from pyzbar.pyzbar import decode
 from PIL import Image
 
@@ -79,6 +81,29 @@ def decode_qr():
         messagebox.showinfo("QR Code Data", f"Decoded Data: {result[0].data.decode('utf-8')}")
     else:
         messagebox.showerror("Error", "No QR code found in the image.")
+
+# Entry field for data
+entry = tk.Entry(root, width=40)
+entry.pack(pady=20)
+
+# generate button
+generate_button = tk.Button(root, text="Generate QR code", command=generate_qr)
+generate_button.pack(pady=10)
+
+# Label to show the QR code
+qr_label = tk.Label(root)
+qr_label.pack(pady=20)
+
+# button to select color
+foreground_button = tk.Button(root, text="Choose Foreground color", command=choose_foreground)
+foreground_button.pack(pady=5)
+
+background_button = tk.Button(root, text="Choose Foreground color", command=choose_background)
+background_button.pack(pady=5)
+
+# button to decode a qr code from an image
+decode_button = tk.Button(root, text="Decode QR code from image", command=decode_qr)
+decode_button.pack(pady=5)
 
 
 # Run the application
